@@ -48,10 +48,13 @@
 	"buffers":
 	[
 		{
+			"contents": "from flask import Flask\nfrom flask import Flask, flash, redirect, render_template, request, session, abort\nimport os\n \napp = Flask(__name__)\n \n@app.route('/')\ndef home():\n    if not session.get('logged_in'):\n        return render_template('login.html')\n    else:\n        return \"Hello Boss!\"\n\n@app.route('/register', methods=['POST'])\ndef register():\n    if not session.get('logged_in'):\n        return render_template('register.html')\n    else:\n        return \"Hello Boss!\"\n\n\n@app.route('/complete_registration', methods=['POST'])\ndef complete_registration():\n    if not session.get('logged_in'):\n        if request.form['password'] != '' and request.form['username'] != '':\n            if request.form['password'] == request.form['confirm_password']:\n                flash('Registration Successful')\n                return register()\n        flash('Wrong Password!')\n        return register()\n    else:\n        return \"Hello Boss!\"\n \n@app.route('/login', methods=['POST'])\ndef do_admin_login():\n    if request.form['password'] == 'password' and request.form['username'] == 'admin':\n        session['logged_in'] = True\n    else:\n        flash('wrong password!')\n    return home()\n \nif __name__ == \"__main__\":\n    app.secret_key = os.urandom(12)\n    app.run(debug=True, host='127.0.0.1', port=5000)",
 			"file": "main.py",
+			"file_size": 1341,
+			"file_write_time": 131664977102188651,
 			"settings":
 			{
-				"buffer_size": 656,
+				"buffer_size": 1298,
 				"encoding": "UTF-8",
 				"line_ending": "Windows",
 				"name": "from flask import Flask"
@@ -61,7 +64,16 @@
 			"file": "templates/login.html",
 			"settings":
 			{
-				"buffer_size": 963,
+				"buffer_size": 1208,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/register.html",
+			"settings":
+			{
+				"buffer_size": 1188,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -124,7 +136,7 @@
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -163,7 +175,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -172,15 +184,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 656,
+						"buffer_size": 1298,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								656,
-								656
+								1298,
+								1298
 							]
 						],
 						"settings":
@@ -189,10 +201,10 @@
 							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 401.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -201,15 +213,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 963,
+						"buffer_size": 1208,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								339,
-								339
+								887,
+								887
 							]
 						],
 						"settings":
@@ -220,11 +232,40 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "templates/register.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1188,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								627,
+								627
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 26.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "static/style.css",
 					"semi_transient": false,
 					"settings":
@@ -250,7 +291,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]

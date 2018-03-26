@@ -1,14 +1,16 @@
-<link rel="stylesheet" href="/static/style.css" type="text/css">
+{% include "header.html" %}
+
 {% block body %}
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
  
- 
+
 <form action="/complete_registration" method="POST">
 	<div class="login">
 		<div class="login-screen">
 			<div class="app-title">
+				<h1>NutHouse Invitational 5</h1>
 				<h1>Registration</h1>
 			</div>
  

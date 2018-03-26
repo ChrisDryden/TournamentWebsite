@@ -1,15 +1,25 @@
-from flask import Flask
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
 import os
  
 app = Flask(__name__)
  
+#Error handlers can be passed to seperate file
+@app.errorhandler(404)
+def page_not_found(e):
+	return render_template('404.html')
+
+
 @app.route('/')
 def home():
+    response = ''
     if not session.get('logged_in'):
-        return render_template('login.html')
+        return render_template('login.html', response=response)
     else:
-        return "Hello Boss!"
+        return redirect(url_for('homepage'))
+
+@app.route('/homepage')
+def home():
+	return render_template('homepage.html')
 
 @app.route('/register', methods=['POST'])
 def register():
