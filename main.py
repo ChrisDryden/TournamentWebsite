@@ -18,7 +18,7 @@ def home():
         return redirect(url_for('homepage'))
 
 @app.route('/homepage')
-def home():
+def homepage():
 	return render_template('homepage.html')
 
 @app.route('/register', methods=['POST'])
